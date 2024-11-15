@@ -28,7 +28,7 @@ jobs:
         uses: ashley-taylor/read-json-property-action@v1.0
         with:
             path: ./package.json
-            propery: version
+            property: version
       
       - name: 创建gitHub Release
         id: create_release
