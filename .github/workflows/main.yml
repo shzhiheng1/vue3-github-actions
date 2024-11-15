@@ -9,19 +9,21 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: 检查master分支
-      - uses : actions/checkout@v2
+        uses : actions/checkout@v2
 
       - name: 设置 Node.js
         uses: actions/setup-node@v2
         with:
           node-version: '18.18.0'
 
+    steps:
       - name: 安装依赖
         run: npm install
 
       - name: build打包
         run: npm run build
-
+    
+    steps:
       - name: 读取当前版本号
         id: version
         uses: ashley-taylor/read-json-property-action@v1.0
