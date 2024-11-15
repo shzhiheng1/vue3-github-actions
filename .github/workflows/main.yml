@@ -7,10 +7,9 @@ on:
 jobs:
   build-and-release:
     runs-on: ubuntu-latest
-    
     steps:
       - name: 检查master分支
-      - uses: actions/checkout@v2
+      - uses : actions/checkout@v2
 
       - name: 设置 Node.js
         uses: actions/setup-node@v2
