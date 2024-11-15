@@ -9,10 +9,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: 检查master分支
-        uses : actions/checkout@v2
+        uses : actions/checkout@v4
 
       - name: 设置 Node.js
-        uses: actions/setup-node@v2
+        uses: actions/setup-node@v4
         with:
           node-version: '18.18.0'
 
@@ -39,3 +39,9 @@ jobs:
            release_name: v${{steps.version.outputs.value}}
            draft: false
            prerelease: false
+      
+      - name: Deploy
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.TOKEN }}
+          publish_dir: ./dist
