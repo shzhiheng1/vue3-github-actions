@@ -1,1 +1,42 @@
+name : Build and Release
 
+on:
+  push:
+    branches:
+      - master #发版分支
+jobs:
+  build-and-release:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: 检查master分支
+      - uses: actions/checkout@v2
+
+      - name: 设置 Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '18.18.0'
+
+      - name: 安装依赖
+        run: npm install
+
+      - name: build打包
+        run: npm run build
+
+      - name: 读取当前版本号
+        id: version
+        uses: ashley-taylor/read-json-property-action@v1.0
+        with:
+            path: ./package.json
+            propery: version
+      
+      - name: 创建gitHub Release
+        id: create_release
+        uses: actions/create-release@latest
+        env:
+          GITHUB_TOKEN: ${{secrets.TOKEN}}
+        whth: 
+           tag_name: v${{steps.version.outputs.value}}
+           release_name: v${{steps.version.outputs.value}}
+           draft: false
+           prerelease: false
