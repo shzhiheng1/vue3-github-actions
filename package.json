@@ -4,13 +4,17 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "dev": "vite",
-    "build": "vite build",
+    "dev": "vite --mode dev",
+    "build:dev": "vite build --mode dev",
+    "build:uat": "vite build --mode uat",
+    "build": "vite build --mode production",
+
     "preview": "vite preview",
     "lint": "eslint . --fix"
   },
   "dependencies": {
     "pinia": "^2.2.6",
+    "terser": "^5.36.0",
     "vue": "^3.5.12",
     "vue-router": "^4.4.5"
   },
