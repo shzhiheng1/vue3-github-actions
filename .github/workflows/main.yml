@@ -4,6 +4,9 @@ on:
   push:
     branches:
       - master #发版分支
+    tags:
+      - 'v*' #tag 发版
+     
 jobs:
   build-and-release:
     runs-on: ubuntu-latest
@@ -22,12 +25,12 @@ jobs:
       - name: build打包
         run: npm run build
     
-      - name: 读取当前版本号
-        id: version
-        uses: ashley-taylor/read-json-property-action@v1.0
-        with:
-            path: ./package.json
-            property: version
+      # - name: 读取当前版本号
+      #   id: version
+      #   uses: ashley-taylor/read-json-property-action@v1.0
+      #   with:
+      #       path: ./package.json
+      #       property: version
       
       # - name: 创建gitHub Release
       #   id: create_release
@@ -40,6 +43,7 @@ jobs:
       #      draft: false
       #      prerelease: false
       
+      # 发布到github提供的服务中去
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3
         with:
