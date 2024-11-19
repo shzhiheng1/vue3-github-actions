@@ -39,3 +39,4 @@ npm run lint
 git tag v1.0.0
 git push origin v1.0.0
 ```
+### 注意一个月后token会过期
