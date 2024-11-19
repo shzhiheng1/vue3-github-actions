@@ -10,6 +10,11 @@ on:
 jobs:
   build-and-release:
     runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        env: [dev, uat, prod]
+
     steps:
       - name: 检查master分支
         uses : actions/checkout@master
@@ -24,6 +29,14 @@ jobs:
 
       - name: build打包
         run: npm run build
+
+      # 打包不同的环境 
+      #  - name: Install and Build
+      #   env:
+      #     NODE_ENV: ${{ matrix.env }}
+      #   run: |
+      #     npm install
+      #     npm run build:${{ matrix.env }}
     
       # - name: 读取当前版本号
       #   id: version
@@ -49,3 +62,30 @@ jobs:
         with:
           github_token: ${{ secrets.TOKEN }}
           publish_dir: ./dist
+
+     # 使用 SSH 部署到服务器
+      # - name: Deploy to Alibaba Cloud Server
+      #   uses: appleboy/ssh-action@v0.1.8
+      #   with:
+      #     host: ${{ secrets.REMOTE_HOST }}
+      #     username: ${{ secrets.REMOTE_USER }}
+      #     password: ${{ secrets.REMOTE_PASSWORD }} #为了安全可用ssh_private_key代替password
+      #     script: |
+      #       rm -rf /path/to/your/server/directory/*
+      #       mkdir -p /path/to/your/server/directory
+      #       cp -r ./dist/* /path/to/your/server/directory/
+
+
+      # 根据不同打包环境放入不容文件夹上面相同
+      # script: |
+      #       if [ "${{ matrix.env }}" == "development" ]; then
+      #         DEPLOY_PATH="/path/to/your/server/development"
+      #       elif [ "${{ matrix.env }}" == "test" ]; then
+      #         DEPLOY_PATH="/path/to/your/server/test"
+      #       else
+      #         DEPLOY_PATH="/path/to/your/server/production"
+      #       fi
+
+      #       rm -rf $DEPLOY_PATH/*
+      #       mkdir -p $DEPLOY_PATH
+      #       cp -r ./dist/* $DEPLOY_PATH/
