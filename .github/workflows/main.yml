@@ -2,8 +2,8 @@ name : Build and Release
 
 on:
   push:
-    # branches:
-    #   - master #发版分支
+    branches:
+      - master #发版分支
     tags:
       - 'v*' #tag 发版
      
@@ -12,7 +12,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: 检查master分支
-        uses : actions/checkout@master
+        uses : actions/checkout@v4
 
       - name: 设置 Node.js
         uses: actions/setup-node@v4

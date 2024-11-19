@@ -33,3 +33,9 @@ npm run build
 ```sh
 npm run lint
 ```
+
+### 发版命令
+```
+git tag v1.0.0
+git push origin v1.0.0
+```
