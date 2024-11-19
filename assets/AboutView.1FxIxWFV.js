@@ -1,0 +1,1 @@
+import{_ as s,c as a,a as n,o}from"./index.C9lA0s1i.js";const t={class:"about"};const r=s({},[["render",function(s,r){return o(),a("div",t,r[0]||(r[0]=[n("h1",null,"关于的页面",-1)]))}]]);export{r as default};
